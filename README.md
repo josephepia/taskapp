@@ -10,6 +10,8 @@ En el desarrollo de esta app se utilizaron las siguientes herramientas
 
 Tanto Ionic y Material Angular manejan sus propios estilos para el flexboxgrid, en vista de eso recurri a una libreria que me agrada, la cual es FlexboxGrid, para el diseño responsivo.
 
+se hizo uso de una rama adicional. 
+
 # Como correr el proyecto
 luego de clonar, instalar Ionic y Angular en el aquipo.
 ```sh
