@@ -1,0 +1,25 @@
+<form [formGroup]="formulario" (ngSubmit)="enviar()" (keyup.enter)="enviar()" autocomplete="on">
+
+  <div class="row center-xs">
+    <ion-text color="primary"><h4>Registrar tarea</h4></ion-text>
+  </div>
+  <mat-dialog-content>
+    <div class="row center-xs">
+      <mat-form-field class="w-172" appearance="outline">
+        <mat-label>Nombre (*)</mat-label>
+        <input matInput placeholder="Nombre"  formControlName="nombre">
+      </mat-form-field>
+    
+      <mat-form-field class="w-172" appearance="outline">
+        <mat-label>Nombre (*)</mat-label>
+        <input matInput placeholder="Descripcion (*)"  formControlName="descripcion">
+      </mat-form-field>      
+    </div>
+  </mat-dialog-content>
+
+  <div class="row center-xs">
+    <button mat-flat-button (click)="cancelar()" type="button">Cancelar</button>
+    <button mat-flat-button (click)="enviar()"  type="submit" [disabled]="formulario.invalid" >Aceptar</button>
+  </div>
+     
+</form>

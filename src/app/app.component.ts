@@ -4,6 +4,21 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import * as firebase from 'firebase';
+
+//cadena de conexion a db Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCEAc5Siz_04eSp4T3-kSyLp5Y5OW0JQyo",
+  authDomain: "taskapp-7a981.firebaseapp.com",
+  databaseURL: "https://taskapp-7a981.firebaseio.com",
+  projectId: "taskapp-7a981",
+  storageBucket: "taskapp-7a981.appspot.com",
+  messagingSenderId: "1031530546626",
+  appId: "1:1031530546626:web:38f338dd44e7d8fd6e825b",
+  measurementId: "G-LKT5DTM7FN"
+};
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -12,44 +27,23 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
-    {
-      title: 'Inbox',
-      url: '/folder/Inbox',
-      icon: 'mail'
-    },
-    {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
-    },
-    {
-      title: 'Favorites',
-      url: '/folder/Favorites',
-      icon: 'heart'
-    },
-    {
-      title: 'Archived',
-      url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
-    }
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+    { title: 'Tareas', url: '/tareas', src: '/assets/008-interview.svg'},
+    { title: 'Acerca de', url: '/folder/Inbox', src: '/assets/018-smartphone-2.svg'},
 
+  ];
+  
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
   ) {
+    // evita crear otra instancia a la coneccion de la base de datos cada vez que abra la app.
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+      
+    }
+
+
     this.initializeApp();
   }
 

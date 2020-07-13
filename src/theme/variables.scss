@@ -1,3 +1,31 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat-palette($mat-indigo);
+$app-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);
+
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
@@ -74,6 +102,41 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  //colores para el status
+  --ion-color-pendiente: #FFC107;
+  --ion-color-pendiente-rgb: 255,193,7;
+  --ion-color-pendiente-contrast: #000000;
+  --ion-color-pendiente-contrast-rgb: 0,0,0;
+  --ion-color-pendiente-shade: #e0aa06;
+  --ion-color-pendiente-tint: #ffc720;
+  
+  --ion-color-terminada: #44BD32;
+  --ion-color-terminada-rgb: 68,189,50;
+  --ion-color-terminada-contrast: #000000;
+  --ion-color-terminada-contrast-rgb: 0,0,0;
+  --ion-color-terminada-shade: #3ca62c;
+  --ion-color-terminada-tint: #57c447;
+
+}
+
+// colores para es estatus
+.ion-color-pendiente {
+  --ion-color-base: var(--ion-color-pendiente);
+  --ion-color-base-rgb: var(--ion-color-pendiente-rgb);
+  --ion-color-contrast: var(--ion-color-pendiente-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-pendiente-contrast-rgb);
+  --ion-color-shade: var(--ion-color-pendiente-shade);
+  --ion-color-tint: var(--ion-color-pendiente-tint);
+}
+
+.ion-color-terminada {
+  --ion-color-base: var(--ion-color-terminada);
+  --ion-color-base-rgb: var(--ion-color-terminada-rgb);
+  --ion-color-contrast: var(--ion-color-terminada-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-terminada-contrast-rgb);
+  --ion-color-shade: var(--ion-color-terminada-shade);
+  --ion-color-tint: var(--ion-color-terminada-tint);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -224,5 +287,126 @@
     --ion-toolbar-background: #1f1f1f;
 
     --ion-tab-bar-background: #1f1f1f;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+//libreria preferida para flexbox
+@import '~flexboxgrid-sass/flexboxgrid.scss';
+
+// arreglo hasta 1000 recomendado para propiedades que no usen porcentaje
+@for $i from 0 through 1000{
+  //------------------------ redondear bordes 
+  .borde-radio-#{$i} {
+    border-radius: #{$i}px !important;
+  }
+
+  .borde-radio-top-#{$i} {
+    border-radius: #{$i}px #{$i}px 0 0 !important;
+  }
+
+  .borde-radio-buton-#{$i} {
+    border-radius: 0 0 #{$i}px #{$i}px !important;
+  }
+  //--------------------------
+
+  // margen
+  .margin-#{$i} {
+    margin: #{$i}px !important;
+  }
+  //margin vertical
+  .margin-vertical-#{$i} {
+    margin-top: #{$i}px !important;
+    margin-bottom: #{$i}px !important;
+  }
+  //margin horizontal
+  .margin-horizontal-#{$i} {
+    margin-left: #{$i}px !important;
+    margin-right: #{$i}px !important;
+  }
+  //margin top
+  .margin-top-#{$i} {
+    margin-top: #{$i}px !important;
+  }
+  //marging bottom
+  .margin-bottom-#{$i} {
+    margin-bottom: #{$i}px !important;
+  }
+  //margin margin-left
+  .margin-left-#{$i} {
+    margin-left: #{$i}px !important;
+  }
+  //margin right
+  .margin-right-#{$i} {
+    margin-right: #{$i}px !important;
+  }
+
+  //pading
+  .padding-#{$i} {
+    padding: #{$i}px !important;
+  }
+
+  .padding-top-#{$i} {
+    padding-top: #{$i}px !important;
+  }
+  .padding-bottom-#{$i} {
+    padding-bottom: #{$i}px !important;
+  }
+  .padding-start-#{$i} {
+    padding-left: #{$i}px !important;
+  }
+  .padding-end-#{$i} {
+    padding-right: #{$i}px !important;
+  }
+
+  .padding-horizontal-#{$i} {
+    padding-left: #{$i}px !important;
+    padding-right: #{$i}px !important;
+  }
+
+  .padding-vertical-#{$i} {
+    padding-top: #{$i}px !important;
+    padding-bottom: #{$i}px !important;
+  }
+
+  //-------- tamano del texto en pixeles
+  .text-#{$i} {
+    font-size: #{$i}px !important;
+  }
+  //
+  // ancho en pixeles 
+  .w-#{$i} {
+    width: #{$i}px !important;
+  }
+  // alto en pixeles
+  .h-#{$i} {
+    height: #{$i}px !important;
+  }
+  // truncar texto especificando a partir de que linea
+  .trunc-#{$i} {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: $i;
+    
+    -webkit-box-orient: vertical;
+    
+  }
+  //------------------------
+  // le cambia el tamano a cualquien elemento en forma simetrica 
+  .avatar-#{$i} {
+    overflow: hidden;
+    width: #{$i}px !important;
+    height: #{$i}px !important;
+  }
+
+  .max-h-#{$i} {
+    max-width: #{$i}px !important;
+  }
+
+  .maxmin-h-#{$i} {
+    min-height: #{$i}px !important;
+    max-height: #{$i}px !important;
   }
 }
