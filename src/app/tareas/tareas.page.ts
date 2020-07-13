@@ -28,7 +28,7 @@ export class TareasPage implements OnInit {
 
   ngOnDestroy(){
     //desvincular el oyende de lectura en tiempo real
-    firebase.database().ref('tareasPublicas').off()
+    firebase.database().ref('tareas').off()
   }
 
   //para visualizar objetos en la vista
@@ -54,16 +54,19 @@ export class TareasPage implements OnInit {
   //modal registro de tareas
   modalRegistro(): void {
     const dialogRef = this.dialog.open(FormularioTareaComponent, {
-      panelClass: ['row','center-xs','col-xs-12','col-sm-8','col-md-4','col-lg-3'],
+      panelClass: ['row','margin-0','center-xs','col-xs-12','col-sm-8','col-md-4','col-lg-3'],
       data: {}
     }
     );
     
     //oyente, que esta pendiente al cerrado del modal
     dialogRef.afterClosed().subscribe(tarea => {
-      tarea['status'] = "pendiente"
-      tarea['propietario'] = (this.user['uid'] || 'publica')
-      this.registrarTarea(tarea);
+      if(tarea){
+        tarea['status'] = "pendiente"
+        tarea['propietario'] = (this.user['uid'] || 'publica')
+        this.registrarTarea(tarea);
+      }
+      
     });
   }
 

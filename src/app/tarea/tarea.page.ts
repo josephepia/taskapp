@@ -35,6 +35,11 @@ export class TareaPage implements OnInit {
     })
   }
 
+  ngOnDestroy(){
+    //desvincular el oyende de lectura en tiempo real
+    firebase.database().ref('teareas').off()
+  }
+
   terminar(){
     firebase.database().ref('tareas/'+this.tarea.id+'/status').set("terminada").then(()=>{
       console.log('tarea modificada correctamente');

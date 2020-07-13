@@ -12,27 +12,30 @@
         </div>
         </ion-toolbar>
       <ion-content>
-
-        
-
         <ion-list id="inbox-list">
-         
-
+          
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
               <ion-icon slot="start" [src]="p.src" size="large" ></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
+          <div *ngIf="!user">
+            <ion-menu-toggle auto-hide="false" >
+              <ion-item routerDirection="root" [routerLink]="['/login']" lines="none" detail="false">
+                <ion-icon slot="start" name="key" size="large" ></ion-icon>
+                <ion-label>Iniciar sesion</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
+          <div *ngIf="user">
+            <ion-menu-toggle auto-hide="false" >
+              <ion-item (click)="cerrarSesion()" routerDirection="root" lines="none" detail="false">
+                <ion-icon slot="start" name="close" size="large" ></ion-icon>
+                <ion-label>Cerrar sesion</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
         </ion-list>
       </ion-content>
     </ion-menu>

@@ -15,14 +15,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { FormularioRegistroComponent } from './formulario-registro/formulario-registro.component';
 
 @NgModule({
   declarations:[
     AppComponent,
-    FormularioTareaComponent    
+    FormularioTareaComponent,
+    FormularioRegistroComponent    
   ],
   entryComponents: [
-    FormularioTareaComponent
+    FormularioTareaComponent,
+    FormularioRegistroComponent
   ],
   imports: [
     BrowserModule,

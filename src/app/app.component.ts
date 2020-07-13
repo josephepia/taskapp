@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
 
   ];
   
+  user //estructura dinamica
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -42,6 +43,16 @@ export class AppComponent implements OnInit {
       firebase.initializeApp(firebaseConfig);
       
     }
+
+    //para verificar el usuario con sesion iniciada
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.user = user
+      }else{
+        this.user = null
+      }
+    })
+  
 
 
     this.initializeApp();
@@ -59,5 +70,15 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+  }
+
+  cerrarSesion(){
+    firebase.auth().signOut().then(function() {
+      console.log('sesion cerrada correctamente');
+      
+    }).catch(function(error) {
+      console.log('error al intentar cerrar la sesion ', error);
+      
+    });
   }
 }

@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'tareas/:id',
     loadChildren: () => import('./tarea/tarea.module').then( m => m.TareaPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
 ];
 

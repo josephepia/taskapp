@@ -36,9 +36,9 @@
 
   <div *ngIf="tareas !== undefined && keys(tareas).length > 0" >
     <div class="row margin-0 center-xs start-lg">
-      <div class="col-xs-12 col-lg-3 padding-0"  >
+      <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 padding-0" *ngFor="let tarea of keys(tareas)" >
         <div class="box">
-          <ion-card *ngFor="let tarea of keys(tareas)" class=" borde-radio-10 padding-0 margin-horizontal-2porcent margin-vertical-8"  mode="ios" [routerLink]="['/tareas/', tarea]">
+          <ion-card  class=" borde-radio-10 padding-0 margin-horizontal-2porcent margin-vertical-8"  mode="ios" [routerLink]="['/tareas/', tarea]">
             <ion-card-header class="start-xs text-capitalize" >
                 <div class="row margin-0 start-xs middle-xs">
                   <img src="/assets/008-interview.svg" class="avatar-50">
@@ -58,7 +58,7 @@
   </div>
 
   <div *ngIf="tareas !== undefined && keys(tareas || {}).length == 0" >
-    <div class="row margin-0 center-xs start-lg">
+    <div class="row margin-0 center-xs ion-padding">
       <ion-label><h4>No se encontraron tareas</h4></ion-label>
     </div>
   </div>
