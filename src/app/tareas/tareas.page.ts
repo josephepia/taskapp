@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { MatDialog } from '@angular/material/dialog';
 import { FormularioTareaComponent } from '../formulario-tarea/formulario-tarea.component';
+import { async } from '@angular/core/testing';
 @Component({
   selector: 'app-tareas',
   templateUrl: './tareas.page.html',
@@ -67,12 +68,24 @@ export class TareasPage implements OnInit {
   }
 
   //registar tarea en base de datos
-  registrarTarea(tarea){
-    firebase.database().ref('/tareas').push(tarea).then(()=>{
+  idTarea //global
+  async registrarTarea(tarea){
+    let rutaTarea = firebase.database().ref('/tareas')
+    this.idTarea = rutaTarea.push().key
+
+    let urlImagen = (tarea.urlImagen || null)
+    tarea.urlImagen = null
+    await rutaTarea.child(this.idTarea).set(tarea).then(()=>{
       console.log('datos guardados correctametne')
     }).catch((erro)=>{
       console.log('ocurrio un error al intentar guardar la tarea -> ', erro) 
     })
+
+    if(urlImagen){
+      this.subirImagen(urlImagen)
+    }
+
+
   }
 
   //limpiar tareas terminadas
@@ -95,6 +108,34 @@ export class TareasPage implements OnInit {
   //crear un arreglo con las tareas terminadas
   filtrar(filtro): any[]{
     return  this.keys(this.tareas).filter((tarea) => (this.tareas[tarea].status).toString().toLowerCase().includes(filtro))
+  }
+
+  //subir imagen de forma asincrona mientras se registra la tarea con sus datos
+  subirImagen(urlImagen){
+    
+    let subiendoImagen = firebase.storage().ref('imagenes/'+this.idTarea).putString(urlImagen, 'data_url').then(async(datos)=>{
+      console.log('subido correctamente');
+       
+       let updates:any ={}
+        await datos.ref.getDownloadURL().then((downloadURL) => {
+          console.log('link de descarga ', downloadURL);
+          
+          updates['tareas/'+this.idTarea+'/urlImagen'] = downloadURL
+           firebase.database().ref().update(updates).then(()=>{
+            console.log('tarea actualizada con su urlimagen');
+          }).catch((erro)=>{
+            console.log('error al actualizar la foto de la tarea en db =>', erro);
+          })
+      });
+       
+       
+        
+       
+    }).catch((erro)=>{
+      console.log('ocurrio un error al subir la foto', erro);
+      
+    })
+    
   }
 
 }

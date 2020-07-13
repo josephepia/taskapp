@@ -17,6 +17,8 @@ export class FormularioTareaComponent implements OnInit {
   formulario = new FormGroup({
     nombre: new FormControl(null,Validators.required),
     descripcion: new FormControl(null,Validators.required),
+    urlImagen: new FormControl(null),
+
   });
 
   //al cancelar el modal
@@ -31,5 +33,26 @@ export class FormularioTareaComponent implements OnInit {
     }
     
     this.dialogRef.close(this.formulario.value);
+  }
+
+  cargarImagen(archivos){
+    
+      if (archivos.length === 0)
+        return;
+   
+      var mimeType = archivos[0].type;
+      if (mimeType.match(/image\/*/) == null) {
+        console.log('formato no soportado');
+        
+        return;
+      }
+   
+      var reader = new FileReader();
+      reader.readAsDataURL(archivos[0]); 
+      reader.onload = (_event) => { 
+        console.log('ruta imagen ',reader.result);
+        this.formulario.controls.urlImagen.setValue(reader.result)
+      }
+    
   }
 }
