@@ -1,0 +1,7 @@
+{
+  "name": "taskapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
